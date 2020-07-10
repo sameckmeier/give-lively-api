@@ -28,4 +28,10 @@ describe Api::V1::NonProfitsController do
       end
     end
   end
+
+  describe 'update' do
+    it 'updates record' do
+      put :update, params: { id: 1, format: 'json' }
+    end
+  end
 end

@@ -16,6 +16,10 @@ module Api
                status: :unprocessable_entity
       end
 
+      def update
+        render :ok
+      end
+
       private
 
       def serializer
