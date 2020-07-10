@@ -3,8 +3,6 @@
 require 'rails_helper'
 
 describe Api::V1::NonProfitsController do
-  render_views
-
   describe 'index' do
     it 'returns json collection' do
       NonProfit.create(name: 'Test1', address: 'test')
