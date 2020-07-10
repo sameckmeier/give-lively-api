@@ -17,7 +17,7 @@ gem 'dotenv-rails', '~> 2.7', groups: %i[development test]
 gem 'pg', '~> 1.2'
 
 # Use fastjson for JSON serialization: https://github.com/Netflix/fast_jsonapi
-gem 'fast_jsonapi'
+gem 'fast_jsonapi', '~> 1.5'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'
@@ -33,7 +33,7 @@ gem 'fast_jsonapi'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
+gem 'rack-cors'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
