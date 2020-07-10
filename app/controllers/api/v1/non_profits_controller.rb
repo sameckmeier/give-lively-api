@@ -5,7 +5,7 @@ module Api
     class NonProfitsController < ApplicationController
       def index
         non_profits = NonProfit.all
-        raise 'this is an error'
+
         if params[:requires_payment] == '1'
           non_profits = non_profits.requires_payment
         end

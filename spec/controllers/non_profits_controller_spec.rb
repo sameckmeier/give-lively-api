@@ -9,8 +9,9 @@ describe Api::V1::NonProfitsController do
       NonProfit.create(name: 'Test2', address: 'test')
 
       get :index
-      data = JSON.parse(response.body)['data']
-      expect(data.length).to eq(2)
+
+      parsed_response = JSON.parse(response.body)['data']
+      expect(parsed_response.length).to eq(2)
     end
 
     context 'when requires_payments query param is present' do
@@ -21,10 +22,10 @@ describe Api::V1::NonProfitsController do
 
         get :index, params: { requires_payment: '1', format: :json }
 
-        data = JSON.parse(response.body)['data']
+        parsed_response = JSON.parse(response.body)['data']
 
-        expect(data.length).to eq(1)
-        expect(data[0]['attributes']['unpaid_donation_amount']).to eq('1.5')
+        expect(parsed_response.length).to eq(1)
+        expect(parsed_response[0]['attributes']['unpaid_donation_amount']).to eq('1.5')
       end
     end
   end
@@ -35,9 +36,9 @@ describe Api::V1::NonProfitsController do
 
       put :update, params: { id: non_profit.id, non_profit: { address: 'test 1' }, format: 'json' }
 
-      data = JSON.parse(response.body)['data']
+      parsed_response = JSON.parse(response.body)['data']
 
-      expect(data['attributes']['address']).to eq('test 1')
+      expect(parsed_response['attributes']['address']).to eq('test 1')
     end
   end
 end
