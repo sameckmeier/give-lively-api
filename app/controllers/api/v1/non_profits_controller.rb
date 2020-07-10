@@ -5,13 +5,14 @@ module Api
     class NonProfitsController < ApplicationController
       def index
         non_profits = NonProfit.all
-
+        raise 'this is an error'
         if params[:requires_payment] == '1'
           non_profits = non_profits.requires_payment
         end
 
         render json: serializer.new(non_profits)
       rescue StandardError => e
+        logger.error(e)
         render json: { error: 'There was an error fetching Non Profits' },
                status: :unprocessable_entity
       end
@@ -23,6 +24,7 @@ module Api
 
         render json: serializer.new(non_profit)
       rescue StandardError => e
+        logger.error(e)
         render json: { error: 'Could not update Non Profit' },
                status: :unprocessable_entity
       end

@@ -10,6 +10,7 @@ module Api
 
         render json: serializer.new(payment)
       rescue StandardError => e
+        logger.error(e)
         render json: { error: 'Could not create Payment' },
                status: :unprocessable_entity
       end
