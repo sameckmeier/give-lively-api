@@ -17,13 +17,24 @@ module Api
       end
 
       def update
-        render :ok
+        non_profit = NonProfit.find(params[:id])
+
+        non_profit.update!(non_profit_params)
+
+        render json: serializer.new(non_profit)
+      rescue StandardError => e
+        render json: { error: 'Could not update Non Profit' },
+               status: :unprocessable_entity
       end
 
       private
 
       def serializer
         NonProfitSerializer
+      end
+
+      def non_profit_params
+        params.require(:non_profit).permit(:address)
       end
     end
   end

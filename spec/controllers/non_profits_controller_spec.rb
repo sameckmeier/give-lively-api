@@ -31,7 +31,13 @@ describe Api::V1::NonProfitsController do
 
   describe 'update' do
     it 'updates record' do
-      put :update, params: { id: 1, format: 'json' }
+      non_profit = NonProfit.create(name: 'Test1', address: 'test')
+
+      put :update, params: { id: non_profit.id, non_profit: { address: 'test 1' }, format: 'json' }
+
+      data = JSON.parse(response.body)['data']
+
+      expect(data['attributes']['address']).to eq('test 1')
     end
   end
 end
