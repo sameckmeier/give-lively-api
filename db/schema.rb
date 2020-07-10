@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_10_144120) do
+ActiveRecord::Schema.define(version: 2020_07_10_170047) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "non_profits", force: :cascade do |t|
@@ -24,4 +25,13 @@ ActiveRecord::Schema.define(version: 2020_07_10_144120) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "payments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.decimal "amount", precision: 8, scale: 2, default: "0.0"
+    t.bigint "non_profit_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["non_profit_id"], name: "index_payments_on_non_profit_id"
+  end
+
+  add_foreign_key "payments", "non_profits"
 end
