@@ -5,8 +5,8 @@ require 'rails_helper'
 describe Api::V1::NonProfitsController do
   describe 'index' do
     it 'returns json collection' do
-      NonProfit.create(name: 'Test1', address: 'test')
-      NonProfit.create(name: 'Test2', address: 'test')
+      NonProfit.create!(name: 'Test1', address: 'test')
+      NonProfit.create!(name: 'Test2', address: 'test')
 
       get :index
 
@@ -16,9 +16,9 @@ describe Api::V1::NonProfitsController do
 
     context 'when requires_payments query param is present' do
       it 'returns filtered json collection' do
-        NonProfit.create(name: 'Test1', address: 'test', member: true)
-        NonProfit.create(name: 'Test2', address: 'test', member: true, unpaid_donation_amount: 1.50.to_d)
-        NonProfit.create(name: 'Test3', address: 'test')
+        NonProfit.create!(name: 'Test1', address: 'test', member: true)
+        NonProfit.create!(name: 'Test2', address: 'test', member: true, unpaid_donation_amount: 1.50.to_d)
+        NonProfit.create!(name: 'Test3', address: 'test')
 
         get :index, params: { requires_payment: '1', format: :json }
 
@@ -32,7 +32,7 @@ describe Api::V1::NonProfitsController do
 
   describe 'update' do
     it 'updates record' do
-      non_profit = NonProfit.create(name: 'Test', address: 'test')
+      non_profit = NonProfit.create!(name: 'Test', address: 'test')
 
       put :update, params: { id: non_profit.id, non_profit: { address: 'test 1' }, format: 'json' }
 

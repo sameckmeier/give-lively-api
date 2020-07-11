@@ -9,6 +9,7 @@ class Donation < ApplicationRecord
   after_create :add_amount_to_non_profit_donation_amount
 
   scope :unfulfilled, -> { where(fulfilled: false) }
+  scope :requires_payment, -> { where(payment_id: nil) }
 
   private
 
