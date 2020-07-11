@@ -8,6 +8,7 @@
 
 ## Run Instructions
 * start postgres (will be different based on how you installed postgres)
+* create .env file in root of project dir and add DEVELOPMENT_DB_NAME, TEST_DB_NAME, DB_USERNAME, and DB_PASSWORD with your own values
 * bundle install
 * rake db:migrate
 * rails s
