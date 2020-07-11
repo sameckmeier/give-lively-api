@@ -11,15 +11,19 @@ class Payment < ApplicationRecord
   after_create :associate_donations
 
   def send_payment
-    # TODOD: Implement deposit functionality to allow GiveLively to transfer funds from payments account to non-member non profit
+    # TODO: Implement deposit functionality to allow GiveLively to transfer funds from payments account to non-member non profit
+
+    non_profit.subtract_donation_amount(amount)
   end
 
   private
 
   def associate_donations
+    return if non_profit.member
+
     donations = non_profit.donations.unfulfilled
 
-    donations.update_all(payment_id: id, fulfilled: true, updated_at: DateTime.now)
+    donations.update_all(payment_id: id, updated_at: DateTime.now)
   rescue StandardError => e
     logger.error(e)
     raise ActiveRecord::Rollback
