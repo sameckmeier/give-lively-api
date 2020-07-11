@@ -3,6 +3,10 @@
 module Api
   module V1
     class NonProfitsController < ApplicationController
+      # GET /api/v1/non_profits
+      # QUERY PARAMS: { requires_payment: 1 | 0 }
+      # DESC: Fetches all or filtered non-profits based on query params
+
       def index
         non_profits = NonProfit.all
 
@@ -16,6 +20,10 @@ module Api
         render json: { error: 'There was an error fetching Non Profits' },
                status: :unprocessable_entity
       end
+
+      # PUT /api/v1/non_profits/:id
+      # PARAMS: { id: int, payment: { address: string }}
+      # DESC: Updates non-profit
 
       def update
         non_profit = NonProfit.find(params[:id])
