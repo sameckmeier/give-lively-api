@@ -16,7 +16,7 @@ describe Api::V1::PaymentsController do
 
     context 'when params are valid' do
       it 'creates record' do
-        non_profit = NonProfit.create(name: 'Test1', address: 'test', unpaid_donation_amount: 1.0.to_d)
+        non_profit = NonProfit.create(name: 'Test', address: 'test', unpaid_donation_amount: 1.0.to_d)
 
         post :create, params: { payment: { non_profit_id: non_profit.id, amount: 1.0.to_d }, format: 'json' }
 

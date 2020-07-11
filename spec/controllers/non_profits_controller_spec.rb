@@ -32,7 +32,7 @@ describe Api::V1::NonProfitsController do
 
   describe 'update' do
     it 'updates record' do
-      non_profit = NonProfit.create(name: 'Test1', address: 'test')
+      non_profit = NonProfit.create(name: 'Test', address: 'test')
 
       put :update, params: { id: non_profit.id, non_profit: { address: 'test 1' }, format: 'json' }
 
