@@ -16,9 +16,9 @@ describe Api::V1::NonProfitsController do
 
     context 'when requires_payments query param is present' do
       it 'returns filtered json collection' do
-        NonProfit.create!(name: 'Test1', address: 'test', member: true)
-        NonProfit.create!(name: 'Test2', address: 'test', member: true, unpaid_donation_amount: 1.50.to_d)
-        NonProfit.create!(name: 'Test3', address: 'test')
+        NonProfit.create!(name: 'Test1', address: 'test')
+        NonProfit.create!(name: 'Test2', address: 'test', unpaid_donation_amount: 1.50.to_d)
+        NonProfit.create!(name: 'Test3', address: 'test', member: true)
 
         get :index, params: { requires_payment: '1', format: :json }
 

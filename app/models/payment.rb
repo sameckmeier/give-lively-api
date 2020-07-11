@@ -8,6 +8,7 @@ class Payment < ApplicationRecord
 
   validates :amount, presence: true, numericality: { greater_than: 0.0.to_d }
 
+  validate :validate_non_profit_is_non_member, on: :create
   after_create :associate_donations
 
   def send_payment
@@ -18,9 +19,11 @@ class Payment < ApplicationRecord
 
   private
 
-  def associate_donations
-    return if non_profit.member
+  def validate_non_profit_is_non_member
+    errors.add(:non_profit, 'is member') if non_profit.member
+  end
 
+  def associate_donations
     donations = non_profit.donations.requires_payment.unfulfilled
 
     donations.update_all(payment_id: id, updated_at: DateTime.now)

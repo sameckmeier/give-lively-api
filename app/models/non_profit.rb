@@ -6,7 +6,7 @@ class NonProfit < ApplicationRecord
 
   validates :name, presence: true
 
-  scope :requires_payment, -> { where(member: true).where('unpaid_donation_amount > ?', 0.0.to_d) }
+  scope :requires_payment, -> { where(member: false).where('unpaid_donation_amount > ?', 0.0.to_d) }
 
   def subtract_donation_amount(amount)
     update!(unpaid_donation_amount: unpaid_donation_amount - amount.to_d)
