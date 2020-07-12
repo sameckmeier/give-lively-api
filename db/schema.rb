@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(version: 2020_07_10_225107) do
 
   create_table "donations", force: :cascade do |t|
     t.decimal "amount", precision: 7, scale: 2, default: "0.0", null: false
-    t.boolean "fulfilled", default: false
     t.bigint "non_profit_id"
     t.uuid "payment_id"
     t.datetime "created_at", precision: 6, null: false
@@ -38,6 +37,7 @@ ActiveRecord::Schema.define(version: 2020_07_10_225107) do
 
   create_table "payments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.decimal "amount", precision: 8, scale: 2, default: "0.0", null: false
+    t.boolean "fulfilled", default: false
     t.bigint "non_profit_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

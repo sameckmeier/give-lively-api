@@ -14,7 +14,8 @@ class Payment < ApplicationRecord
   def send_payment
     # TODO: Implement deposit functionality to allow GiveLively to transfer funds from payments account to non-member non-profit
 
-    non_profit.subtract_donation_amount(amount)
+    non_profit.subtract_payment(amount)
+    update!(fulfilled: true)
   end
 
   private
@@ -24,7 +25,7 @@ class Payment < ApplicationRecord
   end
 
   def associate_donations
-    donations = non_profit.donations.requires_payment.unfulfilled
+    donations = non_profit.donations.requires_payment
 
     donations.update_all(payment_id: id, updated_at: DateTime.now)
   rescue StandardError => e

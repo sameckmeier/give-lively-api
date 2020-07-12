@@ -6,7 +6,7 @@ module Api
       # POST /api/v1/payments
       # PARAMS: { non_profit_id: int, amount: decimal }
       # DESC: Creates payment record, transfers amount from GiveLively account to non-member non-profit,
-      #       subtracts amount from non-profit unpaid_donation_amount, and marks donations as fulfilled
+      #       subtracts amount from non-profit unpaid_donation_amount, and marks payment as fulfilled
 
       def create
         payment = Payment.create!(payment_params)

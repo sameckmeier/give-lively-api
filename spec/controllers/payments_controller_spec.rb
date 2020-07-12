@@ -28,6 +28,7 @@ describe Api::V1::PaymentsController do
         expect(parsed_response.key?('id')).to eq(true)
         expect(parsed_response['attributes']['non_profit_id']).to eq(non_profit.id)
         expect(parsed_response['attributes']['amount']).to eq('1.5')
+        expect(parsed_response['attributes']['fulfilled']).to eq(true)
 
         expect(non_profit.reload.unpaid_donation_amount.to_d).to eq(2.0.to_d)
 

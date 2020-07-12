@@ -8,7 +8,8 @@ class CreatePayments < ActiveRecord::Migration[6.0]
 
     create_table :payments, id: :uuid do |t|
       t.decimal :amount, precision: 8, scale: 2, default: 0.0.to_d, null: false
-      
+      t.boolean :fulfilled, default: false
+
       t.references :non_profit, foreign_key: true
 
       t.timestamps
