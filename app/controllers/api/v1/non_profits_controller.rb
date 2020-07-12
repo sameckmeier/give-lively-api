@@ -18,7 +18,7 @@ module Api
         render json: serializer.new(non_profits)
       rescue StandardError => e
         logger.error(e)
-        render json: { error: 'There was an error fetching Non Profits' },
+        render json: { error: 'There was an error fetching NonProfits' },
                status: :unprocessable_entity
       end
 
@@ -35,7 +35,7 @@ module Api
         render json: serializer.new(non_profit)
       rescue StandardError => e
         logger.error(e)
-        render json: { error: 'Could not update Non Profit' },
+        render json: { error: 'Could not update NonProfit' },
                status: :unprocessable_entity
       end
 
