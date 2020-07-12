@@ -6,7 +6,7 @@ describe Api::V1::PaymentsController do
   describe 'create' do
     context 'when params are invalid' do
       it 'raises exception' do
-        post :create, params: { format: 'json' }
+        post :create, params: { payment: {}, format: 'json' }
 
         parsed_response = JSON.parse(response.body)
 
@@ -17,17 +17,17 @@ describe Api::V1::PaymentsController do
     context 'when params are valid' do
       it 'creates record' do
         non_profit = NonProfit.create!(name: 'Test', address: 'test')
-        donation_1 = Donation.create!(amount: 1.0.to_d, non_profit_id: non_profit.id)
+        donation_1 = Donation.create!(amount: 1.05.to_d, non_profit_id: non_profit.id)
         donation_2 = Donation.create!(amount: 0.5.to_d, non_profit_id: non_profit.id)
         donation_3 = Donation.create!(amount: 2.0.to_d, non_profit_id: non_profit.id, payment_id: Digest::UUID.uuid_v4)
 
-        post :create, params: { payment: { non_profit_id: non_profit.id, amount: 1.5.to_d }, format: 'json' }
+        post :create, params: { payment: { non_profit_id: non_profit.id }, format: 'json' }
 
         parsed_response = JSON.parse(response.body)['data']
 
         expect(parsed_response.key?('id')).to eq(true)
         expect(parsed_response['attributes']['non_profit_id']).to eq(non_profit.id)
-        expect(parsed_response['attributes']['amount']).to eq('1.5')
+        expect(parsed_response['attributes']['amount']).to eq('1.55')
         expect(parsed_response['attributes']['fulfilled']).to eq(true)
 
         expect(non_profit.reload.unpaid_donation_amount.to_d).to eq(2.0.to_d)

@@ -4,7 +4,7 @@ module Api
   module V1
     class PaymentsController < ApplicationController
       # POST /api/v1/payments
-      # PARAMS: { payment: { non_profit_id: int, amount: decimal }}
+      # PARAMS: { payment: { non_profit_id: int }}
       # RESPONSE: { data: { id: string, type: string, attributes: { non_profit_id: int, amount: decimal, fulfilled: boolean }}}
       # DESC: Creates payment record, transfers amount from GiveLively account to non-member non-profit,
       #       subtracts amount from non-profit unpaid_donation_amount, and marks payment as fulfilled
@@ -28,7 +28,7 @@ module Api
       end
 
       def payment_params
-        params.require(:payment).permit(:non_profit_id, :amount)
+        params.require(:payment).permit(:non_profit_id)
       end
     end
   end
