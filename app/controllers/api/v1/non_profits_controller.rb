@@ -5,6 +5,7 @@ module Api
     class NonProfitsController < ApplicationController
       # GET /api/v1/non_profits
       # QUERY PARAMS: { requires_payment: 1 | 0 }
+      # RESPONSE: { data: [{ id: int, type: string, attributes: { name: string, member: boolean, address: string, unpaid_donation_amount: decimal }}] }
       # DESC: Fetches all or filtered non-profits based on query params
 
       def index
@@ -22,7 +23,8 @@ module Api
       end
 
       # PUT /api/v1/non_profits/:id
-      # PARAMS: { id: int, payment: { address: string }}
+      # PARAMS: { id: int, non_profit: { address: string }}
+      # RESPONSE: { id: int, type: string, attributes: { name: string, member: boolean, address: string, unpaid_donation_amount: decimal }}
       # DESC: Updates non-profit
 
       def update
