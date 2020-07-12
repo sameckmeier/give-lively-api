@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2020_07_10_225107) do
   enable_extension "plpgsql"
 
   create_table "donations", force: :cascade do |t|
-    t.decimal "amount", precision: 7, scale: 2, default: "0.0", null: false
+    t.decimal "amount", precision: 8, scale: 2, default: "0.0", null: false
     t.bigint "non_profit_id"
     t.uuid "payment_id"
     t.datetime "created_at", precision: 6, null: false
@@ -30,13 +30,13 @@ ActiveRecord::Schema.define(version: 2020_07_10_225107) do
     t.string "name", null: false
     t.string "address"
     t.boolean "member", default: false
-    t.decimal "unpaid_donation_amount", precision: 8, scale: 2, default: "0.0", null: false
+    t.decimal "unpaid_donation_amount", precision: 10, scale: 2, default: "0.0", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "payments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.decimal "amount", precision: 8, scale: 2, default: "0.0", null: false
+    t.decimal "amount", precision: 9, scale: 2, default: "0.0", null: false
     t.boolean "fulfilled", default: false
     t.bigint "non_profit_id"
     t.datetime "created_at", precision: 6, null: false
