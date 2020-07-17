@@ -35,6 +35,10 @@ module Api
         non_profit.update!(non_profit_params)
 
         render json: serializer.new(non_profit)
+      rescue ActiveRecord::RecordNotFound => e
+        logger.error(e)
+        render json: { error: 'Could not find NonProfit' },
+               status: :not_found
       rescue StandardError => e
         logger.error(e)
         render json: { error: 'Could not update NonProfit' },
