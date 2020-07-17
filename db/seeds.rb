@@ -4,7 +4,10 @@
 puts 'Creating NonProfits'
 non_member_non_profit_requires_payment = NonProfit.create!(name: 'NonMemberRequiresPayment', address: 'test')
 NonProfit.create!(name: 'NonMemberDoesNotRequirePayment', address: 'test')
-NonProfit.create!(name: 'Member', address: 'test', member: true)
+
+8.times do |i|
+  NonProfit.create!(name: "Member #{i}", address: "test #{i}", member: true)
+end
 
 # Donations
 puts 'Creating Donations'
