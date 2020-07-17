@@ -26,7 +26,7 @@ module Api
 
       # PUT /api/v1/non_profits/:id
       # PARAMS: { id: int, non_profit: { address: string }}
-      # RESPONSE: { id: int, type: string, attributes: { name: string, member: boolean, address: string, unpaid_donation_amount: decimal }}
+      # RESPONSE: { data: { id: int, type: string, attributes: { name: string, member: boolean, address: string, unpaid_donation_amount: decimal }}}
       # DESC: Updates non-profit
 
       def update
