@@ -1,11 +1,14 @@
 # frozen_string_literal: true
 
 class NonProfit < ApplicationRecord
+  PAGINATES_PER = 5
+
   has_many :payments
   has_many :donations
 
   validates :name, presence: true
 
+  paginates_per PAGINATES_PER
   scope :requires_payment, -> { where(member: false).where('unpaid_donation_amount > ?', 0.0.to_d) }
 
   def subtract_payment(payment)

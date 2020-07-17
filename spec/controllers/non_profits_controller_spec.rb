@@ -14,6 +14,24 @@ describe Api::V1::NonProfitsController do
       expect(parsed_response.length).to eq(2)
     end
 
+    context 'when page param is set' do
+      it 'returns paginated json collection' do
+        page = 2
+
+        10.times do |i|
+          NonProfit.create!(name: "Member #{i}", address: "test #{i}", member: true)
+        end
+
+        get :index, params: { page: page, format: :json }
+
+        parsed_response = JSON.parse(response.body)['data'].map { |non_profit| non_profit['id'].to_i }
+        expected_ids = NonProfit.page(page).map(&:id)
+
+        expect(parsed_response.length).to eq(NonProfit::PAGINATES_PER)
+        expect(parsed_response).to contain_exactly(*expected_ids)
+      end
+    end
+
     context 'when requires_payments query param is present' do
       it 'returns filtered json collection' do
         NonProfit.create!(name: 'Test1', address: 'test')

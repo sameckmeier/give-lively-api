@@ -15,6 +15,8 @@ module Api
           non_profits = non_profits.requires_payment
         end
 
+        non_profits = non_profits.page(params[:page]&.to_i || 1)
+
         render json: serializer.new(non_profits)
       rescue StandardError => e
         logger.error(e)
