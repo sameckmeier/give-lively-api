@@ -4,9 +4,9 @@ module Api
   module V1
     class NonProfitsController < ApplicationController
       # GET /api/v1/non_profits
-      # QUERY PARAMS: { requires_payment: 1 | 0 }
+      # QUERY PARAMS: { requires_payment: 1 | 0, page: int }
       # RESPONSE: { data: [{ id: int, type: string, attributes: { name: string, member: boolean, address: string, unpaid_donation_amount: decimal }}] }
-      # DESC: Fetches all or filtered non-profits based on query params
+      # DESC: Fetches paginated and filtered non-profits based on query params
 
       def index
         non_profits = NonProfit.all
