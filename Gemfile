@@ -8,7 +8,7 @@ ruby '2.7.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 # Use Puma as the app server
-gem 'puma', '~> 4.1'
+gem 'puma', '~> 4.3'
 
 # Used to load env vars: https://github.com/bkeepers/dotenv
 gem 'dotenv-rails', '~> 2.7', groups: %i[development test]
